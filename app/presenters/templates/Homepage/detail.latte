@@ -1,0 +1,45 @@
+
+{block content}
+<div class="container text-center" style="margin-top: 30px;">
+    {form locationSearchBar}
+        <div class="row">
+            <div class="col-sm-2">{label location}</div>
+            <div class="col-sm-8">{input location}</div>
+            <div class="col-sm-2">{input send}</div>
+        </div>
+    {/form}
+
+    <h1 class="text-left">Počasí pro {$query}</h1>
+
+    <div style="margin-top: 30px;">
+        <table class="table table-hover text-left">
+            <tr>
+                <th>Stav</th>
+                <th>Datum</th>
+                <th>Min. teplota</th>
+                <th>Max. teplota</th>
+                <th>Teplota</th>
+                <th>Rychlost větru</th>
+                <th>Pravděpodobnost</th>
+            </tr>
+            {foreach $weather->consolidated_weather as $day}
+                <tr>
+                    <td><img src="https://www.metaweather.com/static/img/weather/png/64/{$day->weather_state_abbr}.png" height="32" alt="Weather state icon"></td>
+                    <td>{$day->applicable_date|date:'j. n. Y'}</td>
+                    <td>{$day->min_temp|number:0} °C</td>
+                    <td>{$day->max_temp|number:0} °C</td>
+                    <td>{$day->the_temp|number:0} °C</td>
+                    <td>{$day->wind_speed|number:1} mph</td>
+                    <td>{$day->predictability}%</td>
+                </tr>
+            {/foreach}
+        </table>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-8 col-sm-offset-2 bg-info text-left" style="margin-top: 20px; padding: 6px 12px;">
+            <p>Zadávejte anglické názvy měst.</p>
+            <p><em>Počasí je zíkáno prostřednictvím <a href="https://www.metaweather.com/">MetaWeather</a></em></p>
+        </div>
+    </div>
+</div>
