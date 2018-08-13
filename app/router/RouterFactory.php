@@ -17,7 +17,8 @@ class RouterFactory
 	public static function createRouter()
 	{
 		$router = new RouteList;
-		$router[] = new Route('<presenter>/<action>[/<id>]', 'Homepage:default');
-		return $router;
+        $router[] = new Route('pocasi/<query>', 'Homepage:detail');
+        $router[] = new Route('<presenter>/<action>[/<id>]', 'Homepage:default');
+        return $router;
 	}
 }
